@@ -13,7 +13,7 @@ if __name__ == "__main__":
 	data = u.readlines()
 	
 	# loop through the data and create a dict, POST_CODE -> [street,street,...,street]
-	for d in data:
+	for d in data[1:]: 
 		parts = d.decode("iso-8859-1").strip().split(';')
 		if not parts[1] in post_codes:
 			post_codes[parts[1]] = []
@@ -23,6 +23,6 @@ if __name__ == "__main__":
 	# write it to file so we can pass it through the next stage.
 	# keep it as json for portability
 	for k,v in post_codes.iteritems():
-		fh = open("data/streets/%s_streets" %k, "w+")
+		fh = open("data/streets/%s.json" %k, "w+")
 		fh.write(json.dumps(v))
 		fh.close()
